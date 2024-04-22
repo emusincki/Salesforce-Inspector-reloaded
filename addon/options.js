@@ -78,7 +78,8 @@ class OptionsTabSelector extends React.Component {
           {option: OpenLinkNewTabOption, key: 4},
           {option: OpenPermSetSummaryOption, key: 5},
           {option: MdShortcutSearchOption, key: 6},
-          {option: QueryInputAutoFocusOption, key: 7}
+          {option: QueryInputAutoFocusOption, key: 7},
+          {option: QueryDarkSchemeOption, key: 8}
         ]
       },
       {
@@ -464,6 +465,41 @@ class QueryInputAutoFocusOption extends React.Component {
       h("div", {dir: "rtl", className: "slds-form-element__control slds-col slds-size_1-of-12 slds-p-right_medium"},
         h("label", {className: "slds-checkbox_toggle slds-grid"},
           h("input", {type: "checkbox", required: true, id: "checkbox-toggle-tableBorders", "aria-describedby": "checkbox-toggle-tableBorders", className: "slds-input", checked: this.state.disableQueryInputAutoFocus, onChange: this.onChangeQueryInputAutoFocus}),
+          h("span", {id: "checkbox-toggle-tableBorders", className: "slds-checkbox_faux_container center-label"},
+            h("span", {className: "slds-checkbox_faux"}),
+            h("span", {className: "slds-checkbox_on"}, "Enabled"),
+            h("span", {className: "slds-checkbox_off"}, "Disabled"),
+          )
+        )
+      )
+    );
+  }
+}
+
+class QueryDarkSchemeOption extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onChangeDarkScheme = this.onChangeDarkScheme.bind(this);
+    this.state = {enableDarkScheme: (JSON.parse(localStorage.getItem("enableDarkScheme")))};
+  }
+
+  onChangeDarkScheme(e) {
+    let enableDarkScheme = e.target.checked;
+    this.setState({enableDarkScheme});
+    localStorage.setItem("enableDarkScheme", JSON.stringify(enableDarkScheme));
+    location.reload()
+  }
+
+  render() {
+    return h("div", {className: "slds-grid slds-border_bottom slds-p-horizontal_small slds-p-vertical_xx-small"},
+      h("div", {className: "slds-col slds-size_4-of-12 text-align-middle"},
+        h("span", {}, "Dark scheme")
+      ),
+      h("div", {className: "slds-col slds-size_7-of-12 slds-form-element slds-grid slds-grid_align-end slds-grid_vertical-align-center slds-gutters_small"}),
+      h("div", {dir: "rtl", className: "slds-form-element__control slds-col slds-size_1-of-12 slds-p-right_medium"},
+        h("label", {className: "slds-checkbox_toggle slds-grid"},
+          h("input", {type: "checkbox", required: true, id: "checkbox-toggle-tableBorders", "aria-describedby": "checkbox-toggle-tableBorders", className: "slds-input", checked: this.state.enableDarkScheme, onChange: this.onChangeDarkScheme}),
           h("span", {id: "checkbox-toggle-tableBorders", className: "slds-checkbox_faux_container center-label"},
             h("span", {className: "slds-checkbox_faux"}),
             h("span", {className: "slds-checkbox_on"}, "Enabled"),

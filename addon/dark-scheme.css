@@ -1,0 +1,13 @@
+html, body {
+    background-color: #ffffff;
+}
+
+#insext .insext-popup {
+    border: 1px solid #3b4049;
+    border-radius: 0;
+}
+
+html, iframe, .sf-link, .header {
+    filter: invert(100%) contrast(0.8) brightness(1.2) hue-rotate(180deg);
+}
+
